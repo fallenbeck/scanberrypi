@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Author: Rastislav David <rasto@ynet.sk>
+# Modified: Niels <niels@devpresso.org>
+
+# Load the configuration file
+configfile="/opt/scanberrypi/etc/scanberrypi.conf"
+[ ! -f "$configfile" ] && echo "Config file $configfile not found" && exit 1
+source $configfile
+
+
+case "$SCANBD_ACTION" in
+ pdf)
+  # Button does not exist
+  logger -t "scanbd: $0" "$SCANBD_ACTION - PDF [NOT SUPPORTED]"
+  ;;
+
+
+ file)
+  # Button "PDF" (Third button from left to right)
+  
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as PDF (with OCR)"
+  
+  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $dpi --depth $depth -l 0 -t 0 -x 210 -y 297 | convert -density $dpi -page A4 -compress $format -quality $quality - "$scan_dir/$filename.pdf"
+  logger -t "scanbd: $0" "$SCANBD_ACTION - created $scan_dir/$filename.pdf"
+
+  # Postprocessing
+  $spdir/bin/postprocess.sh -d -u -o -f $scan_dir/$filename.pdf &
+
+  # logger -t "scanbd: $0" "$SCANBD_ACTION - Run OCR on $scan_dir/$filename-nocr.pdf"
+  # ocrmypdf "$scan_dir/$filename-nocr.pdf" "$scan_dir/$filename.pdf"
+  # logger -t "scanbd: $0" "$SCANBD_ACTION - created $scan_dir/$filename.pdf"
+
+  # # Upload to Server
+  # upload "$scan_dir/$filename*"
+
+  # # Clean up
+  # cleanup "$scan_dir/$filename*"
+
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Finished"
+  ;;
+
+
+ scan)
+  # Button "Scan" (Second button from left to right)
+
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as JPG ($dpi DPI)"
+ 
+  # Scan image 
+  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $dpi --depth $depth | convert -density $dpi -compress $format -quality $quality - "$scan_dir/$filename.jpg"
+  logger -t "scanbd: $0" "$SCANBD_ACTION - saved to $scan_dir/$filename.jpg"
+
+  # Postprocessing
+  $spdir/bin/postprocess.sh -d -u -f $scan_dir/$filename.jpg &
+
+  # # Upload to Server
+  # upload "$scan_dir/$filename*"
+
+  # # Clean up
+  # cleanup "$scan_dir/$filename*"
+
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Finished"
+  ;;
+
+
+ copy)
+  # Button "Copy" (First button from left to right)
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Copy [NOT SUPPORTED]"
+  ;;
+
+
+email)
+  # Button "eMail" (Fourth button from left to right)
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan and eMail [NOT SUPPORTED]"
+  ;;
+
+
+*)
+  # Something happened that we did not catch
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Unhandled action request."
+  ;;
+esac
+
+exit 0

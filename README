@@ -1,0 +1,32 @@
+ScanberryPi
+===========
+
+Requirements
+------------
+You need a RaspberryPi that is set up correctly using Raspbian. You also
+need a scanner. In my case, I use an old Canon CanoScan LiDE 200 USB
+scanner that is directly attached to my Raspberry Pi.
+
+If you want to upload scanned files to a host, you need some kind of
+FTP server. You should configure the FTP settings in etc/scanberrypi.conf.
+
+However, it is always a good example to have a look at this config file
+and the code. :)
+
+Installation
+------------
+The scripts are designed for being saved in /opt/scanberrypi. You can
+store the scripts in another directory but you then must be sure to
+modify the scripts wherever they point to the default installation dir.
+
+The installation is quite simple:
+Check out this respository, copy the files to /opt/scanberrypi and run:
+
+	cd /opt/scanberrypi
+	cp etc/scanberrypi.conf.sample etc/scanberrypi.conf
+	vim etc/scanberrypi.conf
+	./bin/setup.sh
+
+During operation, the software logs to the syslog. You can keep track of
+its output by calling:
+	journalctl -f

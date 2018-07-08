@@ -1,0 +1,21 @@
+# Scanberry Pi settings
+spdir=/opt/scanberrypi
+
+# File handling
+scan_dir=/var/spool/scan
+datetime=`date +%F_%H%M%S`
+filename="scan-$datetime"
+#send_to=email@address.com
+
+# Scanner settings
+dpi=300
+mode="Color"
+depth=16
+format="JPEG"
+quality=75
+
+# FTP upload settings
+ftp_host="nas.local"
+ftp_user="scanner"
+ftp_pass="-xi'vt5;"
+ftp_dir="/Share/Scanner"
