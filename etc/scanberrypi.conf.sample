@@ -8,7 +8,8 @@ filename="scan-$datetime"
 #send_to=email@address.com
 
 # Scanner settings
-dpi=300
+jpgdpi=300
+pdfdpi=150
 mode="Color"
 depth=16
 format="JPEG"

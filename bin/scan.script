@@ -19,9 +19,9 @@ case "$SCANBD_ACTION" in
  file)
   # Button "PDF" (Third button from left to right)
   
-  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as PDF (with OCR)"
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as PDF ($pdfdpi DPI with OCR)"
   
-  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $dpi --depth $depth -l 0 -t 0 -x 210 -y 297 | convert -density $dpi -page A4 -compress $format -quality $quality - "$scan_dir/$filename.pdf"
+  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $pdfdpi --depth $depth -l 0 -t 0 -x 210 -y 297 | convert -density $pdfdpi -page A4 -compress $format -quality $quality - "$scan_dir/$filename.pdf"
   logger -t "scanbd: $0" "$SCANBD_ACTION - created $scan_dir/$filename.pdf"
 
   # Postprocessing
@@ -44,10 +44,10 @@ case "$SCANBD_ACTION" in
  scan)
   # Button "Scan" (Second button from left to right)
 
-  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as JPG ($dpi DPI)"
+  logger -t "scanbd: $0" "$SCANBD_ACTION - Scan as JPG ($jpgdpi DPI)"
  
   # Scan image 
-  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $dpi --depth $depth | convert -density $dpi -compress $format -quality $quality - "$scan_dir/$filename.jpg"
+  scanimage -d "$SCANBD_DEVICE" --mode $mode --resolution $jpgdpi --depth $depth | convert -density $jpgdpi -compress $format -quality $quality - "$scan_dir/$filename.jpg"
   logger -t "scanbd: $0" "$SCANBD_ACTION - saved to $scan_dir/$filename.jpg"
 
   # Postprocessing
