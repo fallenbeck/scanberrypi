@@ -16,6 +16,6 @@ quality=75
 
 # FTP upload settings
 ftp_host="nas.local"
-ftp_user="scanner"
-ftp_pass="-xi'vt5;"
+ftp_user="user"
+ftp_pass="geheim"
 ftp_dir="/Share/Scanner"
