@@ -30,3 +30,11 @@ Check out this respository, copy the files to /opt/scanberrypi and run:
 During operation, the software logs to the syslog. You can keep track of
 its output by calling:
 	journalctl -f
+
+Remarks
+-------
+If you want or need to disconnect and reconnect your scanner while the
+Raspberry is running, you might need to restart the scanbd.service to
+get the scanner working again:
+
+	sudo systemctl restart scanbd.service
