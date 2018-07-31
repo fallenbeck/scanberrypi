@@ -19,6 +19,9 @@ echo "Installing scripts ..."
 sudo cp /etc/scanbd/scanbd.conf /etc/scanbd/scanbd.conf.orig
 sudo cp $INSTALL_DIR/etc/scanbd.conf /etc/scanbd/scanbd.conf
 
+echo "Enabling scanbd service ..."
+sudo systemctl enable scanbd.service
+
 echo "Restarting scanbd service ..."
 sudo systemctl restart scanbd.service
 
