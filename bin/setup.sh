@@ -7,7 +7,7 @@ INSTALL_DIR=/opt/scanberrypi
 
 ### Here be dragons ###
 echo "You need sudo rights to install this scripts"
-sudo echo "Password acceppted"
+sudo echo "Password accepted"
 
 echo "Installing software ..."
 sudo apt -y install sane sane-utils gscan2pdf scanbd graphicsmagick-imagemagick-compat ocrmypdf ocrmypdf-doc ncftp
