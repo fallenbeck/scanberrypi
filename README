@@ -13,6 +13,17 @@ FTP server. You should configure the FTP settings in etc/scanberrypi.conf.
 However, it is always a good example to have a look at this config file
 and the code. :)
 
+CAUTION: After a user's remark (thanks Alexander) received in 2021 it seems
+         to be impossible to get scanberrypi running on a modern Raspian
+         version. Using this scanberrypi version will require the use of an
+         old Raspbian version like 2018-04-18-raspbian-stretch-lite.zip:
+         http://ftp.jaist.ac.jp/pub/raspberrypi/raspbian_lite/images/raspbian_lite-2018-04-19/
+
+         However, using an outdated distribution is a *very* suboptimal
+         solution for a plenthora of reasons (mainly security reasons).
+         Make sure that the Raspberry Pi is not accessible from the outside
+         world.
+
 Installation
 ------------
 The scripts are designed for being saved in /opt/scanberrypi. You can
